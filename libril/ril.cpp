@@ -267,7 +267,6 @@ static void dispatchSimAuthentication(Parcel &p, RequestInfo *pRI);
 static void dispatchDataProfile(Parcel &p, RequestInfo *pRI);
 static void dispatchRadioCapability(Parcel &p, RequestInfo *pRI);
 static int responseInts(Parcel &p, void *response, size_t responselen);
-static int responseFailCause(Parcel &p, void *response, size_t responselen);
 static int responseStrings(Parcel &p, void *response, size_t responselen);
 static int responseString(Parcel &p, void *response, size_t responselen);
 static int responseVoid(Parcel &p, void *response, size_t responselen);
@@ -2154,27 +2153,6 @@ responseInts(Parcel &p, void *response, size_t responselen) {
         appendPrintBuf("%s%d,", printBuf, p_int[i]);
         p.writeInt32(p_int[i]);
     }
-    removeLastChar;
-    closeResponse;
-
-    return 0;
-}
-
-/** response is an int* pointing to an array of ints */
-static int responseFailCause(Parcel &p, void *response, size_t responselen) {
-    if (response == NULL && responselen != 0) {
-        RLOGE("invalid response: NULL");
-        return RIL_ERRNO_INVALID_RESPONSE;
-    }
-
-    int *p_int = (int *) response;
-
-    startResponse;
-
-    /* write only first element */
-    appendPrintBuf("%s%d", printBuf, p_int[0]);
-    p.writeInt32(p_int[0]);
-
     removeLastChar;
     closeResponse;
 
