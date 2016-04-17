@@ -4468,7 +4468,7 @@ typedef struct {
  * RADIO_NOT_AVAILABLE (radio resetting)
  * GENERIC_FAILURE
  */
-#define RIL_REQUEST_SIM_GET_ATR 133
+#define RIL_REQUEST_SIM_GET_ATR 136
 
 /***********************************************************************/
 
